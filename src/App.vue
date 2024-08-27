@@ -1,3 +1,4 @@
+<!-- eslint-disable prettier/prettier -->
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { ComponentSize } from 'element-plus'
@@ -29,10 +30,7 @@ console.log(import.meta.env)
     @size-change="handleSizeChange"
     @current-change="handleCurrentChange"
   />
-  <div class="example-pagination-block">
-    <div class="example-demonstration">When you have more than 7 pages</div>
-    <el-pagination layout="prev, pager, next" :total="1000" />
-  </div>
+  <svg-icon name="phone" color="yellow" />
 </template>
 
 <style scoped lang="scss">
