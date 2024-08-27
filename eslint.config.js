@@ -2,7 +2,7 @@ import globals from 'globals'
 import pluginJs from '@eslint/js'
 import tseslint from 'typescript-eslint'
 import pluginVue from 'eslint-plugin-vue'
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 export default [
   eslintPluginPrettierRecommended,
@@ -41,6 +41,6 @@ export default [
     },
   },
   {
-    ignores: ['**/*.config.js', 'node_modules/'],
-  },
+    ignores: ['**/*.config.js', 'node_modules/', '**/*.cjs'],
+  }
 ]
