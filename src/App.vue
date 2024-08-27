@@ -1,17 +1,37 @@
 <script setup lang="ts">
-const str = 'abc'
-const str2 = 'def'
-console.log(str, str2)
+import { ref } from 'vue'
+import type { ComponentSize } from 'element-plus'
+const currentPage4 = ref(4)
+const pageSize4 = ref(100)
+const size = ref<ComponentSize>('default')
+const background = ref(false)
+const disabled = ref(false)
+
+const handleSizeChange = (val: number) => {
+  console.log(`${val} items per page`)
+}
+const handleCurrentChange = (val: number) => {
+  console.log(`current page: ${val}`)
+}
+console.log(import.meta.env)
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <el-pagination
+    v-model:current-page="currentPage4"
+    v-model:page-size="pageSize4"
+    :page-sizes="[100, 200, 300, 400]"
+    :size="size"
+    :disabled="disabled"
+    :background="background"
+    layout="total, sizes, prev, pager, next, jumper"
+    :total="400"
+    @size-change="handleSizeChange"
+    @current-change="handleCurrentChange"
+  />
+  <div class="example-pagination-block">
+    <div class="example-demonstration">When you have more than 7 pages</div>
+    <el-pagination layout="prev, pager, next" :total="1000" />
   </div>
 </template>
 

@@ -5,6 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite --open",
+    "build:dev": "vue-tsc && vite build --mode development",
+    "build:test": "vue-tsc && vite build --mode test",
+    "build:prod": "vue-tsc && vite build --mode production",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
     "lint": "eslint src",
@@ -17,6 +20,8 @@
     "preinstall": "node ./scripts/preinstall.js"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "element-plus": "^2.8.1",
     "vue": "^3.4.37"
   },
   "devDependencies": {
