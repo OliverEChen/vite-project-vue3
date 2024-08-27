@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const str = 'abc'
-const str2 = "def"
+const str2 = 'def'
 console.log(str, str2)
 </script>
 
