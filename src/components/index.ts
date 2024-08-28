@@ -3,7 +3,7 @@ import SvgIcon from './SvgIcon/index.vue'
 //引入element-plus提供全部图标组件
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 type ObjType = {
-  [key: string]: string | number | object
+  [key: string]: any
 }
 //全局对象
 const allGlobalComponent: ObjType = { SvgIcon }
