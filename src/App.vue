@@ -18,6 +18,9 @@ console.log(import.meta.env)
 </script>
 
 <template>
+  <div class="test">
+    test
+  </div>
   <el-pagination
     v-model:current-page="currentPage4"
     v-model:page-size="pageSize4"
@@ -34,6 +37,9 @@ console.log(import.meta.env)
 </template>
 
 <style scoped lang="scss">
+.test {
+  width: $base-menu-width;
+}
 .logo {
   height: 6em;
   padding: 1.5em;

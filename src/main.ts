@@ -7,6 +7,7 @@ import App from '@/App.vue'
 import 'virtual:svg-icons-register'
 //引入自定义插件对象:注册整个项目全局组件
 import globalComponent from '@/components'
+import '@/styles/index.scss'
 
 const app = createApp(App)
 
