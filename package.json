@@ -1,6 +1,7 @@
 {
   "name": "vite-project-vue3",
   "private": true,
+  "type": "module",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --open",
@@ -58,7 +59,6 @@
     "vite": "^5.4.1",
     "vite-plugin-mock": "^3.0.2",
     "vite-plugin-svg-icons": "^2.0.1",
-    "vite-plugin-vue-setup-extend-plus": "^0.1.0",
     "vue-tsc": "^2.0.29"
   }
 }

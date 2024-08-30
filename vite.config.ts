@@ -2,7 +2,6 @@ import { defineConfig, loadEnv } from 'vite'
 import path from 'path'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { viteMockServe } from 'vite-plugin-mock'
-import vueSetupExtend from 'vite-plugin-vue-setup-extend-plus'
 import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
@@ -23,7 +22,6 @@ export default defineConfig(({ command, mode }) => {
         mockPath: 'mock',
         enable: command === 'serve',
       }),
-      vueSetupExtend(),
     ],
     resolve: {
       alias: {
