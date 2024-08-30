@@ -8,7 +8,7 @@ export default [
   eslintPluginPrettierRecommended,
   { files: ['**/*.{js,mjs,cjs,ts,vue}'] },
   {
-    languageOptions: { globals: globals.browser }
+    languageOptions: { globals: globals.browser },
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,

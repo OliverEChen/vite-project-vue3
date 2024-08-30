@@ -9,7 +9,7 @@
           :model="ruleForm"
           :rules="rules"
         >
-          <h1>欢迎来到XX后台系统</h1>
+          <h1>欢迎来到 {{ setting.title }}</h1>
           <el-form-item prop="username">
             <el-input
               v-model="ruleForm.username"
@@ -46,6 +46,7 @@
 defineOptions({
   name: 'Login',
 })
+import setting from '@/setting'
 import { reactive, ref } from 'vue'
 import type { FormRules, FormInstance } from 'element-plus'
 import useUserStore from '@/store/modules/user'
