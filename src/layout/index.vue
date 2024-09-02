@@ -2,7 +2,9 @@
   <div class="layout_container">
     <div class="layout_slider">
       <logo />
-      <cat-menu />
+      <el-scrollbar class="layout_menu">
+        <cat-menu :menuList="store.routes" />
+      </el-scrollbar>
     </div>
     <div class="layout_tabbar">111</div>
     <div class="layout_main">
@@ -14,6 +16,9 @@
 <script setup lang="ts">
 import logo from './logo/index.vue'
 import catMenu from './menu/index.vue'
+import useUserStore from '@/store/modules/user'
+
+let store = useUserStore()
 </script>
 <style scoped lang="scss">
 .layout_container {
@@ -24,6 +29,9 @@ import catMenu from './menu/index.vue'
     width: $base-menu-width;
     min-width: $base-menu-min-width;
     background-color: $base-menu-background;
+  }
+  .layout_menu {
+    height: calc(100vh - $base-menu-logo-height);
   }
   .layout_tabbar {
     position: fixed;

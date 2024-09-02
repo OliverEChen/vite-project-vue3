@@ -1,55 +1,69 @@
 <template>
-  <el-scrollbar class="scrollbar-height">
+  <template v-for="item in menuList" :key="item.path">
     <el-menu
-      default-active="2"
       class="el-menu-class"
       :collapse="isCollapse"
+      :router="true"
+      :default-active="$route.path"
       @open="handleOpen"
       @close="handleClose"
     >
-      <el-sub-menu index="1">
-        <template #title>
-          <el-icon><location /></el-icon>
-          <span>Navigator One</span>
-        </template>
-        <el-menu-item-group>
-          <template #title><span>Group One</span></template>
-          <el-menu-item index="1-1">item one</el-menu-item>
-          <el-menu-item index="1-2">item two</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="Group Two">
-          <el-menu-item index="1-3">item three</el-menu-item>
-        </el-menu-item-group>
-        <el-sub-menu index="1-4">
-          <template #title><span>item four</span></template>
-          <el-menu-item index="1-4-1">item one</el-menu-item>
+      <template v-if="!item.children">
+        <el-menu-item
+          :index="item.path"
+          :route="item"
+          v-if="!item.meta.hidden"
+          @click="onClickMenuItem"
+        >
+          <el-icon v-if="item.meta.icon">
+            <component :is="item.meta.icon"></component>
+          </el-icon>
+          <span>{{ item.meta?.title }}</span>
+        </el-menu-item>
+      </template>
+      <template v-if="item.children && item.children.length === 1">
+        <el-menu-item
+          :index="item.children[0].path"
+          :route="item"
+          v-if="!item.meta.hidden"
+          @click="onClickMenuItem"
+        >
+          <el-icon v-if="item.children[0].meta.icon">
+            <component :is="item.children[0].meta.icon"></component>
+          </el-icon>
+          <span>{{ item.meta?.title }}</span>
+        </el-menu-item>
+      </template>
+      <template v-if="item.children && item.children.length > 1">
+        <el-sub-menu :index="item.path">
+          <template #title>
+            <el-icon v-if="item.meta.icon">
+              <component :is="item.meta.icon"></component>
+            </el-icon>
+            <span>{{ item.meta?.title }}</span>
+          </template>
+          <cat-menu :menuList="item.children" />
         </el-sub-menu>
-      </el-sub-menu>
-      <el-menu-item index="2">
-        <el-icon><icon-menu /></el-icon>
-        <template #title>Navigator Two</template>
-      </el-menu-item>
-      <el-menu-item index="3" disabled>
-        <el-icon><document /></el-icon>
-        <template #title>Navigator Three</template>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <el-icon><setting /></el-icon>
-        <template #title>Navigator Four</template>
-      </el-menu-item>
+      </template>
     </el-menu>
-  </el-scrollbar>
+  </template>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue'
-import {
-  Document,
-  Menu as IconMenu,
-  Location,
-  Setting,
-} from '@element-plus/icons-vue'
+defineOptions({
+  name: 'catMenu',
+})
+defineProps(['menuList'])
 
+import { ref } from 'vue'
+//获取路由对象
+import { useRoute } from 'vue-router'
+//获取路由对象
+let $route = useRoute()
+console.log($route.path)
 const isCollapse = ref(false)
+const onClickMenuItem = (val) => {
+  console.log(val)
+}
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
@@ -58,14 +72,11 @@ const handleClose = (key: string, keyPath: string[]) => {
 }
 </script>
 <style scoped lang="scss">
-.scrollbar-height {
-  height: calc(100vh - $base-menu-logo-height);
-  .el-menu-class {
-    --el-menu-text-color: #d7bbbb;
-    --el-menu-hover-text-color: #d7bbbb;
-    --el-menu-bg-color: $base-menu-background;
-    --el-menu-hover-bg-color: #378ae7;
-    --el-menu-active-color: #ffffff;
-  }
+.el-menu-class {
+  --el-menu-text-color: #d7bbbb;
+  --el-menu-hover-text-color: #d7bbbb;
+  --el-menu-bg-color: $base-menu-background;
+  --el-menu-hover-bg-color: #378ae7;
+  --el-menu-active-color: #ffffff;
 }
 </style>

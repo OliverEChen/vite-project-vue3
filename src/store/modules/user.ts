@@ -3,11 +3,13 @@ import { reqLogin } from '@/api/user'
 import { loginFormData } from '@/api/user/type'
 import { UserState } from './types/type'
 import router from '@/router'
+import { constantRoute } from '@/router/routes'
 
 const useUserStore = defineStore('user', {
   state: (): UserState => {
     return {
       token: localStorage.getItem('TOKEN'),
+      routes: constantRoute,
     }
   },
   actions: {
