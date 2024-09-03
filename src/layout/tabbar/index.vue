@@ -20,7 +20,6 @@ import setting from './setting/index.vue'
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
   .tabbar-left {
   }
   .tabbar-right {

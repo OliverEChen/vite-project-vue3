@@ -1,6 +1,6 @@
 <template>
-  <div class="layout_container">
-    <div
+  <el-container class="layout_container">
+    <el-aside
       class="layout_slider"
       :class="{ isCollapse: settingStore.isCollapse ? true : false }"
     >
@@ -14,20 +14,22 @@
           <cat-menu :menuList="store.routes" />
         </el-menu>
       </el-scrollbar>
-    </div>
-    <div
-      class="layout_tabbar"
-      :class="{ isCollapse: settingStore.isCollapse ? true : false }"
-    >
-      <tabbar />
-    </div>
-    <div
-      class="layout_main"
-      :class="{ isCollapse: settingStore.isCollapse ? true : false }"
-    >
-      <cat-main />
-    </div>
-  </div>
+    </el-aside>
+    <el-container>
+      <el-header
+        class="layout_tabbar"
+        :class="{ isCollapse: settingStore.isCollapse ? true : false }"
+      >
+        <tabbar />
+      </el-header>
+      <el-main
+        class="layout_main"
+        :class="{ isCollapse: settingStore.isCollapse ? true : false }"
+      >
+        <cat-main />
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 
 <script setup lang="ts">
@@ -41,12 +43,6 @@ import { useRoute } from 'vue-router'
 let $route = useRoute()
 let store = useUserStore()
 let settingStore = useSettingStore()
-const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
-const handleClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
 </script>
 <style scoped lang="scss">
 .layout_container {

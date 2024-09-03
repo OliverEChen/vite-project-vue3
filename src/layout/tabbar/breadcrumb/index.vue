@@ -1,6 +1,6 @@
 <template>
   <div class="flex f-a-center">
-    <el-icon class="mg-r10" @click="onCollapseChange">
+    <el-icon class="mg-r10" size="20px" @click="onCollapseChange">
       <component :is="store.isCollapse ? 'Fold' : 'Expand'"></component>
     </el-icon>
     <el-breadcrumb separator="/">
