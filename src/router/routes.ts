@@ -13,7 +13,7 @@ export const constantRoute = [
     path: '/',
     name: 'layout',
     meta: {
-      title: '首页',
+      title: 'layout',
       hidden: false,
       icon: '',
     },
@@ -21,7 +21,7 @@ export const constantRoute = [
     redirect: '/home',
     children: [
       {
-        path: 'home',
+        path: '/home',
         name: 'home',
         meta: {
           title: '首页',
@@ -44,26 +44,46 @@ export const constantRoute = [
     redirect: '/system/user',
     children: [
       {
-        path: 'user',
+        path: '/system/user',
         name: 'user',
         meta: {
           title: '用户',
           hidden: false,
-          icon: '',
+          icon: 'User',
         },
-        component: () => import('@/views/home/index.vue'),
+        component: () => import('@/views/system/user/index.vue'),
       },
       {
-        path: 'role',
+        path: '/system/role',
         name: 'role',
         meta: {
           title: '角色',
           hidden: false,
-          icon: '',
+          icon: 'Crop',
         },
-        component: () => import('@/views/home/index.vue'),
+        component: () => import('@/views/system/role/index.vue'),
+      },
+      {
+        path: '/system/permission',
+        name: 'permission',
+        meta: {
+          title: '权限',
+          hidden: false,
+          icon: 'Lock',
+        },
+        component: () => import('@/views/system/permission/index.vue'),
       },
     ],
+  },
+  {
+    path: '/screen',
+    name: 'screen',
+    meta: {
+      title: '数据大屏',
+      hidden: false,
+      icon: 'Platform',
+    },
+    component: () => import('@/views/screen/index.vue'),
   },
   {
     path: '/404',

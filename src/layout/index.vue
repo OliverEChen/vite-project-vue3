@@ -1,14 +1,31 @@
 <template>
   <div class="layout_container">
-    <div class="layout_slider">
+    <div
+      class="layout_slider"
+      :class="{ isCollapse: settingStore.isCollapse ? true : false }"
+    >
       <logo />
       <el-scrollbar class="layout_menu">
-        <cat-menu :menuList="store.routes" />
+        <el-menu
+          class="el-menu-vertical-demo"
+          :default-active="$route.path"
+          :collapse="settingStore.isCollapse"
+        >
+          <cat-menu :menuList="store.routes" />
+        </el-menu>
       </el-scrollbar>
     </div>
-    <div class="layout_tabbar">111</div>
-    <div class="layout_main">
-      <router-view></router-view>
+    <div
+      class="layout_tabbar"
+      :class="{ isCollapse: settingStore.isCollapse ? true : false }"
+    >
+      <tabbar />
+    </div>
+    <div
+      class="layout_main"
+      :class="{ isCollapse: settingStore.isCollapse ? true : false }"
+    >
+      <cat-main />
     </div>
   </div>
 </template>
@@ -16,9 +33,20 @@
 <script setup lang="ts">
 import logo from './logo/index.vue'
 import catMenu from './menu/index.vue'
+import catMain from './main/index.vue'
+import tabbar from './tabbar/index.vue'
 import useUserStore from '@/store/modules/user'
-
+import useSettingStore from '@/store/modules/setting'
+import { useRoute } from 'vue-router'
+let $route = useRoute()
 let store = useUserStore()
+let settingStore = useSettingStore()
+const handleOpen = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath)
+}
+const handleClose = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath)
+}
 </script>
 <style scoped lang="scss">
 .layout_container {
@@ -29,9 +57,21 @@ let store = useUserStore()
     width: $base-menu-width;
     min-width: $base-menu-min-width;
     background-color: $base-menu-background;
+    transition: all 0.3s;
+    &.isCollapse {
+      width: $base-menu-min-width;
+    }
   }
+
   .layout_menu {
     height: calc(100vh - $base-menu-logo-height);
+    .el-menu-vertical-demo {
+      --el-menu-text-color: #d7bbbb;
+      --el-menu-hover-text-color: #d7bbbb;
+      --el-menu-bg-color: $base-menu-background;
+      --el-menu-hover-bg-color: #378ae7;
+      --el-menu-active-color: #ffffff;
+    }
   }
   .layout_tabbar {
     position: fixed;
@@ -39,6 +79,11 @@ let store = useUserStore()
     left: $base-menu-width;
     width: calc(100% - $base-menu-width);
     height: $base-tabbar-height;
+    transition: all 0.3s;
+    &.isCollapse {
+      width: calc(100% - $base-menu-min-width);
+      left: $base-menu-min-width;
+    }
   }
   .layout_main {
     position: absolute;
@@ -48,6 +93,11 @@ let store = useUserStore()
     height: calc(100vh - $base-tabbar-height);
     padding: $main-content-padding;
     overflow: auto;
+    transition: all 0.3s;
+    &.isCollapse {
+      width: calc(100% - $base-menu-min-width);
+      left: $base-menu-min-width;
+    }
   }
 }
 </style>
