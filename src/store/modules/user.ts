@@ -1,13 +1,14 @@
 import { defineStore } from 'pinia'
-import { reqLogin } from '@/api/user'
+import { reqLogin, reqLoginOut, reqUserInfo } from '@/api/user'
 import { loginFormData } from '@/api/user/type'
 import { UserState } from './types/type'
-import router from '@/router'
 import { constantRoute } from '@/router/routes'
-
 const useUserStore = defineStore('user', {
   state: (): UserState => {
     return {
+      username: '',
+      avatar: '',
+      userInfo: {},
       token: localStorage.getItem('TOKEN'),
       routes: constantRoute,
     }
@@ -23,9 +24,29 @@ const useUserStore = defineStore('user', {
         return Promise.reject(res.data)
       }
     },
+    async userInfoAction() {
+      const res = await reqUserInfo()
+      if (res.code === 200) {
+        this.userInfo = res.data
+        this.username = res.data.username
+        this.avatar = res.data.avatar
+        return Promise.resolve(res)
+      } else {
+        return Promise.reject(res.data)
+      }
+    },
     async userLoginOut() {
-      localStorage.removeItem('TOKEN')
-      router.replace('/login')
+      const result: any = await reqLoginOut()
+      if (result.code == 200) {
+        localStorage.removeItem('TOKEN')
+        this.token = ''
+        this.username = ''
+        this.avatar = ''
+        this.userInfo = {}
+        return 'ok'
+      } else {
+        return Promise.reject(new Error(result.message))
+      }
     },
   },
   getters: {},

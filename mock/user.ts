@@ -55,6 +55,21 @@ export default [
       return { code: 200, data: { token } }
     },
   },
+  // 用户登出接口
+  {
+    url: '/api/user/login-out', //请求地址
+    method: 'get', //请求方式
+    response: (request: { headers: { token: string } }) => {
+      //获取请求头携带token
+      const token = request.headers.token
+      const checkUser = createUserList().find((item) => item.token === token)
+      if (checkUser) {
+        return { code: 200, data: { message: 'ok' } }
+      } else {
+        return { code: 200, data: { message: 'err' } }
+      }
+    },
+  },
   // 获取用户信息
   {
     url: '/api/user/info',
@@ -70,7 +85,7 @@ export default [
         return { code: 201, data: { message: '获取用户信息失败' } }
       }
       //如果有返回成功信息
-      return { code: 200, data: { checkUser } }
+      return { code: 200, data: { ...checkUser } }
     },
   },
 ]

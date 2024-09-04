@@ -10,6 +10,7 @@ import globalComponent from '@/components'
 import '@/styles/index.scss'
 import router from '@/router/index'
 import pinia from '@/store/index'
+import './permission'
 
 const app = createApp(App)
 

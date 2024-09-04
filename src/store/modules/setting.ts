@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
 const useSettingStore = defineStore('setting', {
   state: () => {
     return {
-      isCollapse: ref(false),
+      isCollapse: false, // 折叠菜单
+      refresh: false,
     }
   },
   actions: {},

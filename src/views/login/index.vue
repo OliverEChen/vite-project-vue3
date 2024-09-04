@@ -53,11 +53,13 @@ import useUserStore from '@/store/modules/user'
 import router from '@/router'
 import { ElNotification } from 'element-plus'
 import { judgmentTime } from '@/utils/index'
+import { useRoute } from 'vue-router'
 interface RuleForm {
   username: string
   password: string
 }
 let loading = ref(false)
+const route = useRoute()
 const ruleFormRef = ref<FormInstance>()
 const useStore = useUserStore()
 const ruleForm = reactive<RuleForm>({
@@ -90,7 +92,12 @@ const submitForm = async (formEl: FormInstance | undefined) => {
         loading.value = true
         await useStore.userLogin(ruleForm)
         loading.value = false
-        router.replace('/')
+        if (route.query.redirect) {
+          router.replace({ path: route.query.redirect as string })
+        } else {
+          router.replace('/')
+        }
+
         ElNotification({
           type: 'success',
           duration: 2000,

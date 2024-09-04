@@ -1,12 +1,28 @@
 <template>
   <router-view v-slot="{ Component }">
     <transition name="slide-fade" mode="out-in">
-      <component :is="Component"></component>
+      <component :is="Component" v-if="!isFresh"></component>
     </transition>
   </router-view>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { watch, ref, nextTick } from 'vue'
+import useSettingStore from '@/store/modules/setting'
+const settingStore = useSettingStore()
+
+// 是否刷新
+let isFresh = ref(false)
+watch(
+  () => settingStore.refresh,
+  () => {
+    isFresh.value = true
+    nextTick(() => {
+      isFresh.value = false
+    })
+  },
+)
+</script>
 <style scoped lang="scss">
 .slide-fade-enter-active {
   transition: all 0.3s ease-out;
