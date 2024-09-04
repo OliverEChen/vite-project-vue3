@@ -13,7 +13,7 @@ export const constantRoute = [
     path: '/',
     name: 'layout',
     meta: {
-      title: 'layout',
+      title: '',
       hidden: false,
       icon: '',
     },

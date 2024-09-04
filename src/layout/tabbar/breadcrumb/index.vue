@@ -4,17 +4,19 @@
       <component :is="store.isCollapse ? 'Fold' : 'Expand'"></component>
     </el-icon>
     <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
-      <el-breadcrumb-item>
-        <a href="/">promotion management</a>
-      </el-breadcrumb-item>
-      <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
+      <template v-for="item in route.matched" :key="item.path">
+        <el-breadcrumb-item :to="{ path: item.path }" v-show="item.meta.title">
+          {{ item.meta.title }}
+        </el-breadcrumb-item>
+      </template>
     </el-breadcrumb>
   </div>
 </template>
 
 <script setup lang="ts">
 import useSettingStore from '@/store/modules/setting'
+import { useRoute } from 'vue-router'
+const route = useRoute()
 let store = useSettingStore()
 const onCollapseChange = () => {
   store.isCollapse = !store.isCollapse
