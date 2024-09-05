@@ -46,6 +46,9 @@ ci: 持续集成配置的变更
 revert: 回滚
 用于提交回滚之前的提交。
 例如：revert: 回滚feat: 增加用户注册功能 
+
+wip: Work In Process
+在开发中。
 */
   // 校验规则
   rules: {
@@ -63,6 +66,7 @@ revert: 回滚
         'chore',
         'revert',
         'build',
+        'wip',
       ],
     ],
     'type-case': [0],

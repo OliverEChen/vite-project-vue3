@@ -1,4 +1,7 @@
-//createUserList:次函数执行会返回一个数组,数组里面包含两个用户信息
+const token =
+  'eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSCjAK0A0Ndg1S0lFKrShQsjI0NzKzMDA2MzfUUSotTi3yTAGKQZh-ibmpQB2JKbmZeUq1AEsrJIFBAAAA.cHerqMHbJpjcIG3_sLF8jA6itBe1e7JlmUMmV6moBwBYEQtjB64OWGf7NUpPMFtO7fCkfTJr_7ksdy_QQTKYpA'
+
+//createUserList:函数执行会返回一个数组,数组里面包含两个用户信息
 function createUserList() {
   return [
     {
@@ -11,7 +14,7 @@ function createUserList() {
       roles: ['平台管理员'],
       buttons: ['cuser.detail'],
       routes: ['home'],
-      token: 'Admin Token',
+      token: token,
     },
     {
       userId: 2,
@@ -23,7 +26,7 @@ function createUserList() {
       roles: ['系统管理员'],
       buttons: ['cuser.detail', 'cuser.user'],
       routes: ['home'],
-      token: 'System Token',
+      token: token,
     },
   ]
 }
