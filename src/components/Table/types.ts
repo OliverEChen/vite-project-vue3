@@ -1,5 +1,7 @@
 export interface DataSource {
   showSelection?: boolean
+  showOperation?: boolean
+  operationWidth?: number
   total: number
   currentPage: number
   pageSize: number

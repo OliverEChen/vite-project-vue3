@@ -17,6 +17,15 @@
           :width="item.width"
         />
       </template>
+      <el-table-column
+        label="Operations"
+        :width="dataSource.operationWidth"
+        v-if="dataSource.showOperation"
+      >
+        <template #default="scope">
+          <slot name="Operations" v-bind="scope"></slot>
+        </template>
+      </el-table-column>
     </el-table>
     <el-pagination
       class="f-j-end mg-t10"

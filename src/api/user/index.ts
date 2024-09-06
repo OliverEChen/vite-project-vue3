@@ -21,7 +21,3 @@ export const reqLoginOut = () =>
 // 获取用户信息
 export const reqUserInfo = () =>
   request.get<any, userInfoReponseData>(API.USERINFO_URL)
-
-// 获取用户分页列表
-export const reqUserList = (page: number, limit: number) =>
-  request.get<any, any>(`/admin/acl/user/${page}/${limit}`)

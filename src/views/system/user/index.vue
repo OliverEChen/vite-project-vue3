@@ -26,7 +26,25 @@
         @selection="onSelectionChange"
         @page-size="onPageSizeChange"
         @page-current="onPageCurrentChange"
-      />
+      >
+        <template #Operations="scope">
+          <div>
+            <el-button
+              size="small"
+              @click="handleEdit(scope, scope.$index, scope.row)"
+            >
+              Edit
+            </el-button>
+            <el-button
+              size="small"
+              type="danger"
+              @click="handleDelete(scope.$index, scope.row)"
+            >
+              Delete
+            </el-button>
+          </div>
+        </template>
+      </Table>
     </el-card>
   </div>
 </template>
@@ -34,17 +52,20 @@
 <script setup lang="ts">
 import { DataSource } from '@/components/Table/types'
 import { reactive, onMounted } from 'vue'
-import { reqUserList } from '@/api/user/index'
+import { reqUserList } from '@/api/modules/user/index'
 const dataSource = reactive<DataSource>({
   showSelection: true,
-  total: 500,
+  showOperation: true,
+  operationWidth: 200,
+  total: 0,
   currentPage: 1,
-  pageSize: 100,
-  pageSizes: [100, 200, 300, 400],
+  pageSize: 10,
+  pageSizes: [5, 10, 30, 60],
   cols: [
-    { label: '时间', prop: 'date' },
-    { label: '名称', prop: 'name' },
-    { label: '地址', prop: 'address' },
+    { label: '用户名称', prop: 'username' },
+    { label: '姓名', prop: 'name' },
+    { label: '手机号', prop: 'phone' },
+    { label: '创建时间', prop: 'createTime' },
   ],
   data: [
     {
@@ -64,17 +85,32 @@ const dataSource = reactive<DataSource>({
     },
   ],
 })
-onMounted(async () => {
-  await reqUserList(1, 10)
+onMounted(() => {
+  reqUserListFn()
 })
+const reqUserListFn = async () => {
+  const { code, data } = await reqUserList(
+    dataSource.currentPage,
+    dataSource.pageSize,
+  )
+  if (code === 200) {
+    dataSource.data = data.records
+    dataSource.total = data.total
+  }
+}
+const handleEdit = (scope, index, row) => {
+  console.log(scope, index, row)
+}
 const onSelectionChange = (val: object[]) => {
   console.log(val)
 }
 const onPageSizeChange = (val: number) => {
   dataSource.pageSize = val
+  reqUserListFn()
 }
 const onPageCurrentChange = (val: number) => {
   dataSource.currentPage = val
+  reqUserListFn()
 }
 </script>
 <style scoped lang="scss"></style>
