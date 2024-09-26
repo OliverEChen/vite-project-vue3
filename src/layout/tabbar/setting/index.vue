@@ -2,7 +2,7 @@
   <div class="flex f-a-center">
     <el-button icon="Refresh" circle @click="onRefresh" />
     <el-button icon="FullScreen" circle @click="onFullScreen" />
-    <el-button icon="setting" circle />
+    <el-button icon="setting" circle @click="onSetting"/>
     <el-image
       style="width: 32px; height: 32px; margin-left: 10px; border-radius: 50%"
       :src="userStore.avatar"
@@ -21,6 +21,7 @@
         </el-dropdown-menu>
       </template>
     </el-dropdown>
+    <Setting ref="settingRef"></Setting>
   </div>
 </template>
 
@@ -28,10 +29,19 @@
 import useUserStore from '@/store/modules/user'
 import useSettingStore from '@/store/modules/setting'
 import { useRoute, useRouter } from 'vue-router'
+import { ref } from 'vue'
+import Setting from './components/Setting.vue'
 const route = useRoute()
 const router = useRouter()
 const userStore = useUserStore()
 const settingStore = useSettingStore()
+const settingRef = ref()
+const onSetting = () => {
+  console.log(settingRef.value)
+  settingRef.value.open()
+
+  // settingRef.value.open()
+}
 const onRefresh = () => {
   settingStore.refresh = !settingStore.refresh
 }
